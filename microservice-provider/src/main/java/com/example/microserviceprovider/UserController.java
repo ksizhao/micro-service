@@ -24,10 +24,10 @@ public class UserController {
     @GetMapping("/getUser")
     public String getUser(String username){
         User user =userMapper.findUserByUsername(username);
-//        UserResp resp=new UserResp();
-//        resp.setUserName(user.getUser_name());
-//        resp.setUserPassword(user.getUser_password());
-//        JsonResult respJsonResult=new JsonResult("操作成功","0",resp);
+        UserResp resp=new UserResp();
+        resp.setUserName(user.getUser_name());
+        resp.setUserPassword(user.getUser_password());
+        JsonResult respJsonResult=new JsonResult("操作成功","0",resp);
         return  user!=null ? user.getUser_name()+"的密码是："+user.getUser_password():"用户不存在";
     }
 
