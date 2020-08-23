@@ -4,10 +4,10 @@ import com.example.microserviceprovider.common.JsonResult;
 import com.example.microserviceprovider.dao.UserMapper;
 import com.example.microserviceprovider.entry.User;
 import com.example.microserviceprovider.resp.UserResp;
+import com.example.microserviceprovider.service.CartFeignClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,7 +15,10 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    UserMapper userMapper;
+    private UserMapper userMapper;
+
+    @Autowired
+    private CartFeignClient cartFeignClient;
 
     //http://localhost:8888/getUser?username=xiaoli2
     @GetMapping("/getUser")
@@ -56,5 +59,11 @@ public class UserController {
     @RequestMapping("/getUserList")
     public List getUserList(String username, String password){
         return userMapper.getUserList();
+    }
+
+    @PostMapping("/toCart/{productId}")
+    public ResponseEntity addCart(@PathVariable("productId") Long productId){
+        Long result = cartFeignClient.addCart(productId);
+        return ResponseEntity.ok(result);
     }
 }
