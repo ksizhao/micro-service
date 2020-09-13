@@ -13,7 +13,7 @@ public interface UserMapper {
 
     void deleteUserByUsername(String username);
 
-    void saveUser(User user);
+    int saveUser(User user);
 
     List<User> getUserList();
 }
