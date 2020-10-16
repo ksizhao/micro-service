@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: spring-cloud-alibaba-dubbo-gateway
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 172.18.12.52:8848
+      config:
+        server-addr: 172.18.12.52:8848
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+#        - id: first_route
+#          uri: https://www.bilibili.com
+#          predicates:
+#            - Path=/api-boot-datasource-switch.html
+        - id: first_route
+          uri: lb://spring-cloud-alibaba-dubbo-consumer
+          predicates:
+            - Path=/consumer/**
+
+server:
+  port: 12345
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
