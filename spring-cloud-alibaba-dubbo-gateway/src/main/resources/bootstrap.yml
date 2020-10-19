@@ -6,24 +6,35 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 172.18.12.52:8848
+        server-addr: 127.0.0.1:8848
       config:
-        server-addr: 172.18.12.52:8848
+        server-addr: 127.0.0.1:8848
     gateway:
       discovery:
         locator:
-          enabled: true
-          lower-case-service-id: true
+          enabled: true # 启用自动根据服务ID生成路由
+          lower-case-service-id: true # 设置路由的路径为小写的服务ID
       routes:
-#        - id: first_route
-#          uri: https://www.bilibili.com
-#          predicates:
-#            - Path=/api-boot-datasource-switch.html
+        - id: admin
+          uri: lb://spring-cloud-alibaba-admin
+          predicates:
+            - Path=/admin/**
+          filters:
+            - name: AuthenticationFilter  # 身份认证
+            - name: AuthorizationFilter   # 用户鉴权
+            - StripPrefix=1 # 移除前缀 admin
         - id: first_route
           uri: lb://spring-cloud-alibaba-dubbo-consumer
           predicates:
             - Path=/consumer/**
-
+          filters:
+            - StripPrefix=1 # 移除前缀 consumer
+  redis:
+    database: 0
+    host: 127.0.0.1
+    password: ''
+    port: 6379
+    timeout: 1200
 server:
   port: 12345
 
@@ -33,3 +44,5 @@ management:
     web:
       exposure:
         include: '*'
+
+

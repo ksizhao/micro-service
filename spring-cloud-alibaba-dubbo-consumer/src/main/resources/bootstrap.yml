@@ -14,7 +14,7 @@ spring:
         dashboard: 10.60.45.174:8086
 
 server:
-  port: 8090
+  port: 8088
 
 dubbo:
   scan:
