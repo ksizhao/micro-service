@@ -45,6 +45,7 @@ public class DynamicRouteServiceImpl implements ApplicationEventPublisherAware {
     public String update(RouteDefinition definition) {
         try {
             this.routeDefinitionWriter.delete(Mono.just(definition.getId()));
+
         } catch (Exception e) {
             return "update fail,not find route  routeId: "+definition.getId();
         }
