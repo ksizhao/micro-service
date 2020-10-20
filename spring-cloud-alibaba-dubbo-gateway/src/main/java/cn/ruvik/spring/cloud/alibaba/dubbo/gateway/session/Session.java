@@ -1,7 +1,7 @@
 package cn.ruvik.spring.cloud.alibaba.dubbo.gateway.session;
 
-import cn.ruvik.spring.cloud.alibaba.dubbo.gateway.dto.LoginUser;
-import cn.ruvik.spring.cloud.alibaba.dubbo.gateway.dto.PermissionDTO;
+import cn.ruvik.spring.cloud.alibaba.dubbo.entity.LoginUser;
+import cn.ruvik.spring.cloud.alibaba.dubbo.entity.PermissionDTO;
 import com.alibaba.fastjson.JSON;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;

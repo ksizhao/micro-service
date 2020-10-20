@@ -19,6 +19,7 @@
         <module>spring-cloud-alibaba-dubbo-provider</module>
         <module>spring-cloud-alibaba-dubbo-gateway</module>
         <module>spring-cloud-alibaba-admin</module>
+        <module>sping-cloud-dao</module>
         <module>leaf-core</module>
     </modules>
 
@@ -63,6 +64,10 @@
             <artifactId>spring-cloud-starter-dubbo</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

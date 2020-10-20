@@ -1,10 +1,11 @@
-package cn.ruvik.spring.cloud.alibaba.dubbo.gateway.dto;
+package cn.ruvik.spring.cloud.alibaba.dubbo.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -17,7 +18,9 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoginUser {
+public class LoginUser implements Serializable {
+
+    private static final long serialVersionUID = 4536709687844487506L;
     String userName;
     String realName;
     String userToken;

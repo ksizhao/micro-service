@@ -1,4 +1,4 @@
-package cn.ruvik.spring.cloud.alibaba.dubbo.gateway.dto;
+package cn.ruvik.spring.cloud.alibaba.dubbo.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
