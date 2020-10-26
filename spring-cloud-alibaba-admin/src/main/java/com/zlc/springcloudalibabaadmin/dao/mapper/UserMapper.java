@@ -14,4 +14,6 @@ public interface UserMapper {
     UserDO getById(Long id);
 
     Long insert(UserDO userDO);
+
+
 }

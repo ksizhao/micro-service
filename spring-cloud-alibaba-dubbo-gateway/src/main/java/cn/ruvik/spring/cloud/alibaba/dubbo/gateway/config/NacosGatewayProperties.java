@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  * @createTime 2020年10月17日 16:00:00
  */
 @Data
-@ConfigurationProperties(prefix="nacos", ignoreUnknownFields = true)
+@ConfigurationProperties(prefix="nacos")
 @Configuration
 public class NacosGatewayProperties {
 

@@ -2,6 +2,8 @@ package com.zlc.springcloudalibabaadmin.dao.entity;
 
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * @author <a href="mailto:chenxilzx1@gmail.com">theonefx</a>
  */
@@ -18,4 +20,6 @@ public class UserDO {
     private String userToken;
 
     private Integer age;
+
+    private Date createTime;
 }

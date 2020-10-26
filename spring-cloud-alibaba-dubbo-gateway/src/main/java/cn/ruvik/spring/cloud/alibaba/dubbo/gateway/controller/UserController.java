@@ -6,7 +6,9 @@ import cn.ruvik.spring.cloud.alibaba.dubbo.gateway.session.Session;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,6 +26,9 @@ public class UserController {
     @Autowired
     private Session session;
 
+    // 注入配置文件上下文
+    @Autowired
+    private ConfigurableApplicationContext applicationContext;
 
     @Reference(check = false)
     private LoginServiceApi loginServiceApi;
@@ -46,9 +51,22 @@ public class UserController {
         return loginUser;
     }
 
-    @GetMapping("/getUserInfo")
-    @SentinelResource(value = "getUserInfo")
+    // 从上下文中读取配置
+    @GetMapping(value = "/hi")
+    public String sayHi() {
+        return "Hello " + applicationContext.getEnvironment().getProperty("nacos.timeout");
+    }
+
+    @PostMapping("/getUserInfo")
+    @SentinelResource(value = "getUserInfo",defaultFallback = "respFallback")
     public LoginUser getUserInfo(String userName){
         return loginServiceApi.getUserName(userName);
     }
+
+    public String respFallback(Throwable t){
+
+        return "服务提供者不可用";
+    }
+
+
 }

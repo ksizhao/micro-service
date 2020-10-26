@@ -3,12 +3,18 @@ spring:
     name: spring-cloud-alibaba-dubbo-gateway
   main:
     allow-bean-definition-overriding: true
+  profiles:
+    active: prod
   cloud:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
       config:
         server-addr: 127.0.0.1:8848
+        file-extension: properties
+    sentinel:
+          transport:
+            dashboard: 10.60.45.127:8086
     gateway:
       discovery:
         locator:
