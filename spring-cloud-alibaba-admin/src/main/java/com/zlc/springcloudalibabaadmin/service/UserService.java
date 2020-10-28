@@ -12,4 +12,6 @@ import com.zlc.springcloudalibabaadmin.dao.entity.UserDO;
  */
 public interface UserService {
      UserDO getUserName(String userName);
+
+     void insertUserInfo();
 }

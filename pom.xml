@@ -19,7 +19,6 @@
         <module>spring-cloud-alibaba-dubbo-provider</module>
         <module>spring-cloud-alibaba-dubbo-gateway</module>
         <module>spring-cloud-alibaba-admin</module>
-        <module>sping-cloud-dao</module>
         <module>leaf-core</module>
     </modules>
 

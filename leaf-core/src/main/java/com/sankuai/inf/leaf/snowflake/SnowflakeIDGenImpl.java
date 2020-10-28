@@ -3,8 +3,8 @@ package com.sankuai.inf.leaf.snowflake;
 import com.google.common.base.Preconditions;
 import com.sankuai.inf.leaf.IDGen;
 import com.sankuai.inf.leaf.common.Utils;
-import fingard.entity.Result;
-import fingard.entity.Status;
+import cn.ruvik.spring.cloud.alibaba.dubbo.entity.Result;
+import cn.ruvik.spring.cloud.alibaba.dubbo.entity.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

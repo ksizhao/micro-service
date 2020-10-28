@@ -1,7 +1,7 @@
 package com.sankuai.inf.leaf;
 
 
-import fingard.entity.Result;
+import cn.ruvik.spring.cloud.alibaba.dubbo.entity.Result;
 
 public interface IDGen {
     Result get(String key);

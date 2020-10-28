@@ -2,6 +2,8 @@ package cn.ruvik.spring.cloud.alibaba.dubbo.gateway.controller;
 
 import cn.ruvik.spring.cloud.alibaba.dubbo.api.LoginServiceApi;
 import cn.ruvik.spring.cloud.alibaba.dubbo.entity.LoginUser;
+import cn.ruvik.spring.cloud.alibaba.dubbo.gateway.common.ResultContext;
+import cn.ruvik.spring.cloud.alibaba.dubbo.gateway.service.LoginService;
 import cn.ruvik.spring.cloud.alibaba.dubbo.gateway.session.Session;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import org.apache.dubbo.config.annotation.Reference;
@@ -33,22 +35,29 @@ public class UserController {
     @Reference(check = false)
     private LoginServiceApi loginServiceApi;
 
-    public LoginUser login(String userName, String password){
-        LoginUser loginUser = LoginUser.builder()
-                .userName(userName)
-//                .realName(user.getRealName())
-                .userToken(UUID.randomUUID().toString())
-                .loginTime(new Date())
-                .build();
+    @Autowired
+    private LoginService loginService;
 
-        // 保存session
-        session.saveSession(loginUser);
+    @PostMapping("/login")
+    public ResultContext<LoginUser> login(String userName, String password){
+//        LoginUser loginUser = LoginUser.builder()
+//                .userName(userName)
+////                .realName(user.getRealName())
+//                .userToken(UUID.randomUUID().toString())
+//                .loginTime(new Date())
+//                .build();
+//
+//        // 保存session
+//        session.saveSession(loginUser);
 //
 //        // 查询权限
 //        List<PermissionDTO> permissions = permissionProvider.findByUserName(userName);
 //        // 保存用户权限
 //        session.saveUserPermissions(userName, permissions);
-        return loginUser;
+        if(loginServiceApi.getUserName(userName)==null){
+            return ResultContext.businessFail("用户不存在",null);
+        }
+        return ResultContext.buildSuccess("操作成功",loginService.login(userName,password));
     }
 
     // 从上下文中读取配置

@@ -1,8 +1,8 @@
 package cn.ruvik.spring.cloud.alibaba.dubbo.consumer.controller;
 
 import cn.ruvik.spring.cloud.alibaba.dubbo.api.DubboApi;
+import cn.ruvik.spring.cloud.alibaba.dubbo.api.IdGenerateApi;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
-import fingard.api.IdGenerateApi;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -52,6 +52,7 @@ public class ConsumerController {
     @PostMapping("/getId")
     @SentinelResource(value = "getId",defaultFallback = "respFallback")
     public Object test() {
+
         return idGenerateApi.getId("");
     }
 

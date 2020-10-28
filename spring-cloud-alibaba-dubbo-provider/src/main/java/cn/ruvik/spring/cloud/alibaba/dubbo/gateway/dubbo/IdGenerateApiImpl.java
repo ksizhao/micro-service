@@ -1,8 +1,9 @@
 package cn.ruvik.spring.cloud.alibaba.dubbo.gateway.dubbo;
 
+import cn.ruvik.spring.cloud.alibaba.dubbo.api.IdGenerateApi;
+import cn.ruvik.spring.cloud.alibaba.dubbo.entity.Result;
 import cn.ruvik.spring.cloud.alibaba.dubbo.gateway.service.SnowflakeService;
-import fingard.api.IdGenerateApi;
-import fingard.entity.Result;
+
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 

@@ -22,4 +22,5 @@ public class NacosGatewayProperties {
     private String groupId;
 
     private Long timeout;
+
 }

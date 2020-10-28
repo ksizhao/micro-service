@@ -1,5 +1,6 @@
 package cn.ruvik.spring.cloud.alibaba.dubbo.gateway.service;
 
+import cn.ruvik.spring.cloud.alibaba.dubbo.entity.Result;
 import cn.ruvik.spring.cloud.alibaba.dubbo.gateway.exception.InitException;
 import cn.ruvik.spring.cloud.alibaba.dubbo.gateway.util.Constants;
 import com.sankuai.inf.leaf.IDGen;
@@ -7,7 +8,6 @@ import com.sankuai.inf.leaf.common.PropertyFactory;
 import com.sankuai.inf.leaf.common.ZeroIDGen;
 
 import com.sankuai.inf.leaf.snowflake.SnowflakeIDGenImpl;
-import fingard.entity.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

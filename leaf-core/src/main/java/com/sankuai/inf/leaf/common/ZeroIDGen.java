@@ -1,8 +1,10 @@
 package com.sankuai.inf.leaf.common;
 
 import com.sankuai.inf.leaf.IDGen;
-import fingard.entity.Result;
-import fingard.entity.Status;
+import cn.ruvik.spring.cloud.alibaba.dubbo.entity.Result;
+import cn.ruvik.spring.cloud.alibaba.dubbo.entity.Status;
+
+
 
 public class ZeroIDGen implements IDGen {
     @Override
