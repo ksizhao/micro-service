@@ -3,10 +3,12 @@ package cn.ruvik.spring.cloud.alibaba.dubbo.consumer.controller;
 import cn.ruvik.spring.cloud.alibaba.dubbo.api.DubboApi;
 import cn.ruvik.spring.cloud.alibaba.dubbo.api.IdGenerateApi;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,7 @@ import org.springframework.web.client.RestTemplate;
  */
 @RestController
 @RequestMapping("/consumer")
+@Slf4j
 public class ConsumerController {
 
     @Autowired
@@ -52,13 +55,13 @@ public class ConsumerController {
     @PostMapping("/getId")
     @SentinelResource(value = "getId",defaultFallback = "respFallback")
     public Object test() {
-
         return idGenerateApi.getId("");
     }
 
+
     public String respFallback(Throwable t){
 
-        return "Resuest failed:"+t.getClass().getCanonicalName();
+        return "服务不可用，原因："+t.getClass().getCanonicalName();
     }
 
 }

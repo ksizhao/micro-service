@@ -11,11 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Date;
-import java.util.UUID;
 
 /**
  * @author zhaolc
@@ -39,7 +35,7 @@ public class UserController {
     private LoginService loginService;
 
     @PostMapping("/login")
-    public ResultContext<LoginUser> login(String userName, String password){
+    public ResultContext<LoginUser> login(String userName, String password) {
 //        LoginUser loginUser = LoginUser.builder()
 //                .userName(userName)
 ////                .realName(user.getRealName())
@@ -54,10 +50,14 @@ public class UserController {
 //        List<PermissionDTO> permissions = permissionProvider.findByUserName(userName);
 //        // 保存用户权限
 //        session.saveUserPermissions(userName, permissions);
-        if(loginServiceApi.getUserName(userName)==null){
-            return ResultContext.businessFail("用户不存在",null);
+        if (loginServiceApi.getUserName(userName) == null) {
+            return ResultContext.businessFail("用户不存在", null);
         }
-        return ResultContext.buildSuccess("操作成功",loginService.login(userName,password));
+        LoginUser loginUser = loginService.login(userName, password);
+        if (loginUser == null) {
+            return ResultContext.businessFail("操作失败", null);
+        }
+        return ResultContext.buildSuccess("操作成功", loginUser);
     }
 
     // 从上下文中读取配置
@@ -67,12 +67,12 @@ public class UserController {
     }
 
     @PostMapping("/getUserInfo")
-    @SentinelResource(value = "getUserInfo",defaultFallback = "respFallback")
-    public LoginUser getUserInfo(String userName){
+    @SentinelResource(value = "getUserInfo", defaultFallback = "respFallback")
+    public LoginUser getUserInfo(String userName) {
         return loginServiceApi.getUserName(userName);
     }
 
-    public String respFallback(Throwable t){
+    public String respFallback(Throwable t) {
 
         return "服务提供者不可用";
     }

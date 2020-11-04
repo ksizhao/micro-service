@@ -14,7 +14,7 @@ spring:
         file-extension: properties
     sentinel:
           transport:
-            dashboard: 10.60.45.127:8086
+            dashboard: 10.60.45.127:8080
     gateway:
       discovery:
         locator:
@@ -38,8 +38,8 @@ spring:
             - StripPrefix=1 # 移除前缀 consumer
   redis:
     database: 1
-    host: 127.0.0.1
-    password: ''
+    host: 172.17.1.43
+    password:
     port: 6379
     timeout: 1200
 server:

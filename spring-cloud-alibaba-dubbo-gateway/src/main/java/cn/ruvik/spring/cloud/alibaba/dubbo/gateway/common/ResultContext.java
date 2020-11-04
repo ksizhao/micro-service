@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * @author zhaolc
  * @version 1.0
- * @description TODO
+ * @description 返回消息包装类
  * @createTime 2020年10月27日 10:03:00
  */
 public class ResultContext<T> implements Serializable {

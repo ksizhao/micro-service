@@ -8,6 +8,7 @@ import com.zlc.springcloudalibabaadmin.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -33,28 +34,32 @@ public class UserServiceImpl implements UserService {
     @Reference(check = false)
     private IdGenerateApi idGenerateApi;
 
+    private static int count=1;
+
     @Override
     public UserDO getUserName(String userName) {
         return userMapper.getByName(userName);
     }
 
     @Override
-    @PostConstruct
     public void insertUserInfo() {
         long start=System.currentTimeMillis();
         List<UserDO> userDOList=new LinkedList<>();
-        for (int i = 0; i < 1000; i++) {
-            UserDO userDO=new UserDO();
-            userDO.setAge(i);
-            userDO.setCreateTime(new Date());
-            userDO.setId(idGenerateApi.getId("").getId());
-            userDO.setPassword("12345"+i);
-            userDO.setUserName("zlc"+i);
-            userDO.setRealName("test"+i);
-            userDOList.add(userDO);
-//            userMapper.insert(userDO);
-        }
+//        for (int i = 1001; i < 100; i++) {
+//
+////            userMapper.insert(userDO);
+//        }
+        UserDO userDO=new UserDO();
+        userDO.setAge(count);
+        userDO.setCreateTime(new Date());
+        userDO.setId(idGenerateApi.getId("").getId());
+        userDO.setPassword("12345"+count);
+        userDO.setUserName("zlc"+count);
+        userDO.setRealName("test"+count);
+        userDOList.add(userDO);
         userMapper.batchInsertFromDual(userDOList);
+        count++;
+        log.info("计数值[{}]",count);
         long end=System.currentTimeMillis();
         log.info("耗时[{}]毫秒",end-start);
     }
