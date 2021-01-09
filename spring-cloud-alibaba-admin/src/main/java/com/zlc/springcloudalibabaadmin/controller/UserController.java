@@ -20,6 +20,7 @@ public class UserController {
 
     @GetMapping("/getUserName")
     public String getUserName(){
+        log.info("输出{}","admin");
         return "admin";
     }
 }
